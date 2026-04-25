@@ -14,15 +14,15 @@ LLM не требуется: вся логика скоринга детерми
 
 import re
 
-from config import WEIGHTS
-from constants.ranking import (
+from ..config import WEIGHTS
+from ..constants.ranking import (
     INTERNSHIP_MARKERS,
     JUNIOR_MARKERS,
     MIDDLE_MARKERS,
     ROLE_ALIASES,
     SENIORISH_TITLE_MARKERS,
 )
-from models import Job, RankedJob, UserQuery
+from ..models import Job, RankedJob, UserQuery
 
 
 def filter_and_rank_jobs(jobs: list[Job], query: UserQuery) -> list[RankedJob]:

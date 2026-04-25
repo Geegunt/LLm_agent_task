@@ -101,7 +101,7 @@ Raw snapshot хранится без контактных полей работ�
 
 ## Инструменты агента
 
-Агент использует шесть инструментов через единый реестр `TOOLS` в [agent.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/agent.py:15).
+Агент использует шесть инструментов через единый реестр `TOOLS` в [src/agent.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/src/agent.py:15).
 
 При этом в основном сценарии агент по сути опирается на два ключевых
 инструмента:
@@ -137,22 +137,22 @@ Raw snapshot хранится без контактных полей работ�
 инструмент — одно атомарное действие. Это делает проект проще для логирования,
 отладки, повторного запуска с конкретного шага и изолированного тестирования.
 
-`parse_query` — [tools/parse_query.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/tools/parse_query.py:1)  
+`parse_query` — [src/tools/parse_query.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/src/tools/parse_query.py:1)  
 Преобразует естественный запрос в `UserQuery`. В LLM-режиме использует Groq
 Function Calling со строгой JSON-схемой. Без ключа переключается на
 rule-based fallback по словарю русских и транслитерированных терминов.
 
-`fetch_jobs` — [tools/fetch_jobs.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/tools/fetch_jobs.py:1)  
+`fetch_jobs` — [src/tools/fetch_jobs.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/src/tools/fetch_jobs.py:1)  
 Ходит в API «Работа России», нормализует ответ в `list[Job]` и сохраняет
 очищенный raw snapshot. Если API недоступен, возвращает данные из
 `data/jobs.json`.
 
-`broaden_query` — [agent.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/agent.py:39)  
+`broaden_query` — [src/agent.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/src/agent.py:39)  
 Условный инструмент расширения запроса. Если live API вернул слишком мало
 результатов, агент может запросить у LLM более широкий поисковый запрос или
 применить rule-based fallback.
 
-`filter_and_rank_jobs` — [tools/filter_and_rank.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/tools/filter_and_rank.py:1)  
+`filter_and_rank_jobs` — [src/tools/filter_and_rank.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/src/tools/filter_and_rank.py:1)  
 Explainable ranking по пяти сигналам:
 
 | Сигнал | Вес | Что означает |
@@ -166,12 +166,12 @@ Explainable ranking по пяти сигналам:
 Скорер убирает дубликаты, жёстко отсеивает senior/lead для junior-запросов и
 мягко диверсифицирует топ, чтобы верх выдачи не был забит одним работодателем.
 
-`explain_top_jobs` — [tools/explain_job.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/tools/explain_job.py:1)  
+`explain_top_jobs` — [src/tools/explain_job.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/src/tools/explain_job.py:1)  
 Генерирует объяснение для каждой вакансии из топа. В текущей версии ответ Groq
 сначала собирается целиком, а затем выводится аккуратно в итоговом CLI.
 Без `GROQ_API_KEY` используется шаблонный fallback.
 
-`compare_jobs` — [tools/compare_jobs.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/tools/compare_jobs.py:1)  
+`compare_jobs` — [src/tools/compare_jobs.py](/Users/glebgrigorev/Desktop/programming/LLM-helper_task/src/tools/compare_jobs.py:1)  
 Короткая сравнительная таблица по топ-N вакансиям. Вызывается только по флагу
 `--compare`.
 
@@ -259,23 +259,31 @@ normalized данных, отсутствие секретов в репозит
 
 ```text
 .
-├── main.py
-├── display.py
-├── agent.py
-├── llm_client.py
-├── models.py
-├── config.py
+├── main.py                  # тонкая точка входа: python3 main.py ...
 ├── collect_jobs.py
 ├── normalize_jobs.py
 ├── validate_project.py
 ├── README.md
 ├── REFLECTION.md
-├── tools/
-│   ├── parse_query.py
-│   ├── fetch_jobs.py
-│   ├── filter_and_rank.py
-│   ├── explain_job.py
-│   └── compare_jobs.py
+├── src/
+│   ├── cli.py               # основной CLI и interactive-режим
+│   ├── agent.py             # orchestration, tools registry, agentic loop
+│   ├── config.py
+│   ├── display.py
+│   ├── llm_client.py
+│   ├── models.py
+│   ├── constants/
+│   │   ├── prompts.py
+│   │   ├── parsing.py
+│   │   ├── ranking.py
+│   │   ├── jobs.py
+│   │   └── display.py
+│   └── tools/
+│       ├── parse_query.py
+│       ├── fetch_jobs.py
+│       ├── filter_and_rank.py
+│       ├── explain_job.py
+│       └── compare_jobs.py
 └── data/
     ├── jobs.json
     └── raw/

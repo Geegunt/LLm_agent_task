@@ -1,8 +1,8 @@
 """Рендерит компактную сравнительную таблицу для топ-N ранжированных вакансий."""
 
-from constants.display import EMPTY_LABEL, LEVEL_LABELS, TYPE_LABELS_SHORT
-from constants.ranking import INTERNSHIP_MARKERS, JUNIOR_MARKERS
-from models import RankedJob
+from ..constants.display import EMPTY_LABEL, LEVEL_LABELS, TYPE_LABELS_SHORT
+from ..constants.ranking import INTERNSHIP_MARKERS, JUNIOR_MARKERS
+from ..models import RankedJob
 
 
 def compare_jobs(ranked_jobs: list[RankedJob]) -> str:

@@ -17,7 +17,7 @@ import urllib.request
 from datetime import date, datetime
 from pathlib import Path
 
-from config import API_TIMEOUT, TRUDVSEM_API_BASE, TRUDVSEM_PAGE_SIZE
+from src.config import API_TIMEOUT, TRUDVSEM_API_BASE, TRUDVSEM_PAGE_SIZE
 
 RAW_DIR = Path(__file__).parent / "data" / "raw"
 

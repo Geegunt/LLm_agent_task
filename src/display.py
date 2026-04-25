@@ -3,9 +3,9 @@
 import shutil
 import textwrap
 
-from constants.display import EMPTY_LABEL, LEVEL_LABELS, TYPE_LABELS_FULL
-from constants.ranking import INTERNSHIP_MARKERS, JUNIOR_MARKERS
-from models import RankedJob, UserQuery
+from .constants.display import EMPTY_LABEL, LEVEL_LABELS, TYPE_LABELS_FULL
+from .constants.ranking import INTERNSHIP_MARKERS, JUNIOR_MARKERS
+from .models import RankedJob, UserQuery
 
 W       = max(90, min(shutil.get_terminal_size((110, 24)).columns, 140))
 LABEL_W = 10

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from config import GROQ_API_KEY, GROQ_MODEL, GROQ_TIMEOUT
+from .config import GROQ_API_KEY, GROQ_MODEL, GROQ_TIMEOUT
 
 
 class LLMError(RuntimeError):

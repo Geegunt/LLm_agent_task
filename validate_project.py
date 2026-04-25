@@ -123,7 +123,7 @@ def check_env_gitignored() -> None:
 
 
 def check_tools_registered() -> None:
-    import agent
+    from src import agent
 
     expected = {
         "parse_query",
@@ -136,7 +136,7 @@ def check_tools_registered() -> None:
 
 
 def check_parser() -> None:
-    import agent
+    from src import agent
 
     query = agent.dispatch("parse_query", raw="я студент, хочу стажировку по питону в москве")
     assert "python" in query.keywords
@@ -156,7 +156,7 @@ def check_parser() -> None:
 
 
 def check_parser_edge_cases() -> None:
-    import agent
+    from src import agent
 
     ambiguous = agent.dispatch(
         "parse_query",
@@ -169,7 +169,7 @@ def check_parser_edge_cases() -> None:
 
 
 def check_interactive_context() -> None:
-    import agent
+    from src import agent
 
     context = agent.dispatch("parse_query", raw="frontend")
     query, results, _, _ = agent.run(
@@ -186,7 +186,7 @@ def check_interactive_context() -> None:
 
 
 def check_ranking() -> None:
-    import agent
+    from src import agent
 
     query, results, explanations, comparison = agent.run(
         "стажировка python москва",
@@ -206,7 +206,7 @@ def check_ranking() -> None:
 
 
 def check_result_diversity() -> None:
-    import agent
+    from src import agent
 
     _, results, _, _ = agent.run("стажировка python москва", top_n=5, compare=False)
     assert len(results) == 5
@@ -215,7 +215,7 @@ def check_result_diversity() -> None:
 
 
 def check_skill_filtering() -> None:
-    import agent
+    from src import agent
 
     query = agent.dispatch("parse_query", raw="frontend")
     jobs = agent.dispatch("fetch_jobs", query=query.source_query)
@@ -225,7 +225,7 @@ def check_skill_filtering() -> None:
 
 
 def check_role_alignment() -> None:
-    import agent
+    from src import agent
 
     query = agent.dispatch("parse_query", raw="junior backend python удалённо")
     jobs = agent.dispatch("fetch_jobs", query=query.source_query)

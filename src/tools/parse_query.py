@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import re
 
-from constants.parsing import (
+from ..constants.parsing import (
     AMBIGUOUS_INTERNSHIP_SIGNALS,
     AMBIGUOUS_WORK_SIGNALS,
     LOCATION_SIGNALS,
@@ -19,9 +19,9 @@ from constants.parsing import (
     SKILL_ALIASES,
     TYPE_SIGNALS,
 )
-from constants.prompts import PARSE_QUERY_SYSTEM_PROMPT, PARSE_QUERY_TOOL, PARSE_QUERY_USER_TEMPLATE
-from llm_client import LLMError, llm_available, tool_call_completion
-from models import UserQuery
+from ..constants.prompts import PARSE_QUERY_SYSTEM_PROMPT, PARSE_QUERY_TOOL, PARSE_QUERY_USER_TEMPLATE
+from ..llm_client import LLMError, llm_available, tool_call_completion
+from ..models import UserQuery
 
 
 def _unique(values: list[str]) -> list[str]:

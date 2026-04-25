@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).parent
+ROOT_DIR = Path(__file__).resolve().parent.parent
 
 
 def _load_local_env(path: Path = ROOT_DIR / ".env") -> None:

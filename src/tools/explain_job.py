@@ -2,16 +2,16 @@
 
 import re
 
-from constants.display import TYPE_LABELS_FULL
-from constants.ranking import (
+from ..constants.display import TYPE_LABELS_FULL
+from ..constants.ranking import (
     INTERNSHIP_MARKERS,
     JUNIOR_MARKERS,
     MIDDLE_MARKERS,
     SENIORISH_TITLE_MARKERS,
 )
-from constants.prompts import EXPLAIN_SYSTEM_PROMPT, EXPLAIN_USER_TEMPLATE
-from llm_client import LLMError, chat_completion, llm_available
-from models import RankedJob, UserQuery
+from ..constants.prompts import EXPLAIN_SYSTEM_PROMPT, EXPLAIN_USER_TEMPLATE
+from ..llm_client import LLMError, chat_completion, llm_available
+from ..models import RankedJob, UserQuery
 
 
 def explain_top_jobs(ranked_jobs: list[RankedJob], query: UserQuery) -> list[str]:

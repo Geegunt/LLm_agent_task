@@ -14,7 +14,7 @@ from dataclasses import asdict
 from datetime import date
 from pathlib import Path
 
-from tools.fetch_jobs import normalize_trudvsem_vacancy
+from src.tools.fetch_jobs import normalize_trudvsem_vacancy
 
 RAW_DIR = Path(__file__).parent / "data" / "raw"
 OUT_PATH = Path(__file__).parent / "data" / "jobs.json"

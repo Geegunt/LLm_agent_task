@@ -8,21 +8,21 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date, datetime
-from pathlib import Path
 
-from config import (
+from ..config import (
     API_TIMEOUT,
     JOBS_DATA_PATH,
     LIVE_API_ENABLED,
+    ROOT_DIR,
     TRUDVSEM_API_BASE,
     TRUDVSEM_LIMIT,
     TRUDVSEM_PAGE_SIZE,
 )
-from constants.jobs import CANONICAL_TAGS, TECH_TAGS
-from constants.ranking import MIDDLE_MARKERS, SENIORISH_TITLE_MARKERS
-from models import Job
+from ..constants.jobs import CANONICAL_TAGS, TECH_TAGS
+from ..constants.ranking import MIDDLE_MARKERS, SENIORISH_TITLE_MARKERS
+from ..models import Job
 
-RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
+RAW_DIR = ROOT_DIR / "data" / "raw"
 
 # Количество вакансий, реально полученных из live API при последнем вызове `fetch_jobs`.
 # None  — API отключён через `LIVE_API_ENABLED=0`.

@@ -1,26 +1,26 @@
 from typing import Callable
 
-from config import TOP_N
-from constants.prompts import (
+from .config import TOP_N
+from .constants.prompts import (
     AGENTIC_SYSTEM_PROMPT,
     AGENTIC_TOOL_SCHEMAS,
     BROADEN_QUERY_SYSTEM_PROMPT,
     BROADEN_QUERY_USER_TEMPLATE,
 )
-from llm_client import (
+from .llm_client import (
     LLMError,
     agentic_completion,
     chat_completion,
     llm_available,
     llm_mode_label,
 )
-from models import RankedJob, UserQuery
-import tools.fetch_jobs as _fetch_jobs_module
-from tools.compare_jobs    import compare_jobs
-from tools.explain_job     import explain_top_jobs
-from tools.fetch_jobs      import fetch_jobs
-from tools.filter_and_rank import filter_and_rank_jobs
-from tools.parse_query     import merge_query_context, parse_query, parse_query_fallback
+from .models import RankedJob, UserQuery
+from .tools import fetch_jobs as _fetch_jobs_module
+from .tools.compare_jobs    import compare_jobs
+from .tools.explain_job     import explain_top_jobs
+from .tools.fetch_jobs      import fetch_jobs
+from .tools.filter_and_rank import filter_and_rank_jobs
+from .tools.parse_query     import merge_query_context, parse_query, parse_query_fallback
 
 
 TOOLS: dict[str, Callable] = {
